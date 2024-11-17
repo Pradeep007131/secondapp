@@ -4,72 +4,61 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>com.example</groupId>
+    <groupId>com.pradeep</groupId>
     <artifactId>secondapp</artifactId>
-    <version>1.0-SNAPSHOT</version>
+    <version>1.0.0</version>
     <packaging>jar</packaging>
 
-    <name>SecondApp</name>
+    <name>secondapp</name>
+    <description>A simple Java application for Docker</description>
     <url>http://maven.apache.org</url>
 
-    <dependencies>
-        <!-- Servlet API -->
-        <dependency>
-            <groupId>javax.servlet</groupId>
-            <artifactId>javax.servlet-api</artifactId>
-            <version>4.0.1</version> <!-- Adjust the version based on your servlet container -->
-            <scope>provided</scope>
-        </dependency>
-
-        <!-- JUnit for unit tests (Optional) -->
-        <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-            <version>4.12</version>
-            <scope>test</scope>
-        </dependency>
-
-        <!-- SLF4J for logging -->
-        <dependency>
-            <groupId>org.slf4j</groupId>
-            <artifactId>slf4j-api</artifactId>
-            <version>1.7.32</version>
-        </dependency>
-
-        <dependency>
-            <groupId>org.slf4j</groupId>
-            <artifactId>slf4j-simple</artifactId>
-            <version>1.7.32</version>
-            <scope>runtime</scope>
-        </dependency>
-
-        <!-- Log4j2 for advanced logging (Optional) -->
-        <dependency>
-            <groupId>org.apache.logging.log4j</groupId>
-            <artifactId>log4j-api</artifactId>
-            <version>2.17.0</version>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.logging.log4j</groupId>
-            <artifactId>log4j-core</artifactId>
-            <version>2.17.0</version>
-        </dependency>
-
-    </dependencies>
-
+    <!-- Defining the final name for the generated jar -->
     <build>
+        <finalName>secondapp</finalName> <!-- This will make the jar file named secondapp.jar -->
         <plugins>
+            <!-- Maven Compiler Plugin -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>3.8.1</version>
                 <configuration>
-                    <source>11</source> <!-- Java source version -->
-                    <target>11</target> <!-- Java target version -->
+                    <source>11</source>
+                    <target>11</target> <!-- Ensure that this matches the Java version you're using -->
                 </configuration>
+            </plugin>
+
+            <!-- Maven Shade Plugin to create an executable jar with dependencies -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-shade-plugin</artifactId>
+                <version>3.2.1</version>
+                <executions>
+                    <execution>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>shade</goal>
+                        </goals>
+                        <configuration>
+                            <finalName>secondapp</finalName> <!-- Ensures the output jar is named secondapp.jar -->
+                        </configuration>
+                    </execution>
+                </executions>
             </plugin>
         </plugins>
     </build>
+
+    <dependencies>
+        <!-- Example Dependency: Spring Boot (Optional) -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+            <version>2.5.5</version> <!-- Update to your required version -->
+        </dependency>
+
+        <!-- Add any other dependencies your project requires here -->
+
+    </dependencies>
 
     <repositories>
         <repository>
@@ -77,6 +66,5 @@
             <url>https://repo.maven.apache.org/maven2</url>
         </repository>
     </repositories>
-
 </project>
 
